@@ -44,6 +44,7 @@ def initilize_parameters(args):
     global url, fileN, fileDownloaded, nPhotos, page, batch, header, company, int_page
     fileN = 0
     fileDownloaded = 0
+    fileDownloadedperPage = 0
     REQUEST_HEADER = {
             'User-Agent': "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36"}
     header = REQUEST_HEADER
@@ -82,18 +83,18 @@ def download_batch(args):
         image_elements = soup.find_all("img")
         for img_attr in image_elements:
             if fileDownloaded == nPhotos:
-                print("batch downloaded!")
+                print("everything downloaded!")
                 break
             link = img_attr.attrs['src']
             link_split = link.split("/")
             if link[0:5] == 'https' and link_split[-1][0] != 'p':
                     url2 = link.split("-")[0]+".jpg"
                     r = requests.get(url2)
-                    with open(os.path.join(path,company+str(fileN)+".jpg"), 'wb') as file:
+                    with open(os.path.join(path,company+str(fileDownloaded)+".jpg"), 'wb') as file:
                         file.write(r.content)
 
                     # crop the image to remove airliners.net logo
-                    image = cv2.imread(path+"/"+company+str(fileN)+".jpg")
+                    image = cv2.imread(path+"/"+company+str(fileDownloaded)+".jpg")
                     x=0
                     y=0
                     w=1200
@@ -129,9 +130,9 @@ def download_batch(args):
 def download_iterations(args):
     iterations = args['iterations']
     for i in range(iterations):
-        flag= download_batch(args)
+        flag = download_batch(args)
         if flag == True:
-            time.sleep(10)
+            time.sleep(20)
 
 
 # In[12]:
@@ -141,7 +142,6 @@ def main():
     args = input_options()
     initilize_parameters(args)
     download_iterations(args)
-    print('everything downloaded')
     
 
 
@@ -151,6 +151,14 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+# In[35]:
+
+
+print(len(range(0)))
+
+
+# In[ ]:
 
 
 
