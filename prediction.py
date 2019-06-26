@@ -17,10 +17,10 @@ import argparse
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-m", "--modelName", required=True,
-    help="Model's name")
-ap.add_argument("-hm", "--historyModel", required=True,
-    help="History's name json file")
+ap.add_argument("-m", "--modelName",
+    help="Model's name input", type=str, default='airplanes.model')
+ap.add_argument("-hm", "--historyModel",
+    help="History's name json file", type=str, default='history.json')
 ap.add_argument("-p", "--predictionSingle",
     help="Image path of a single prediction", type=str, default='test.jpg')
 ap.add_argument("-f", "--predictionFolder",

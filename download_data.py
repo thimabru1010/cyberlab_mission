@@ -27,7 +27,7 @@ def input_options():
     ap.add_argument("-n", "--name", required=True,
         help="company's name: azul or gol")
     ap.add_argument("-b", "--batch",
-        help="number of photos to download if wanted less than 250",type=int, default=250)
+        help="number of photos to download if wanted less than 252",type=int, default=252)
     ap.add_argument("-i", "--iterations",
         help="number of iterations to download per batch",type=int, default=1)
     ap.add_argument("-s", "--startPage",
