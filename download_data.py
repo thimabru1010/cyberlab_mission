@@ -61,7 +61,10 @@ def initilize_parameters(args):
     if company == 'gol':
         url = url_gol
 
-    page = url[-1]
+    if url[-2] == '=':
+        page = url[-1]
+    else:
+        page = url[-2] + url[-1]
     int_page = int(page)
 
 
