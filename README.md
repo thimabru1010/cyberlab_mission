@@ -73,18 +73,16 @@ Also, I used data augmentation to enhance the model and prevent overfitting. But
 ```
 batch_size = 20
 
-aug2=ImageDataGenerator(rescale=1./255, rotation_range=30, 
-                    horizontal_flip=True, 
-                    zoom_range=0.3)
+aug2=ImageDataGenerator(rescale=1./255, rotation_range=30, horizontal_flip=True, zoom_range=0.3)
                     
 aug = ImageDataGenerator(rescale=1./255)
 
-train_folder = '/home/thiago/GitHub/deep_learning/estagio/modules/dataset/train'
-test_folder = '/home/thiago/GitHub/deep_learning/estagio/modules/dataset/test'
+train_folder = 'dataset/train'
+test_folder = 'dataset/test'
 
-train_generator = aug2.flow_from_directory(train_folder,                                                    target_size=(150, 150),                                                    batch_size=batch_size,                                                    class_mode='binary', shuffle=True, seed=42)
+train_generator = aug2.flow_from_directory(train_folder,target_size=(150, 150), batch_size=batch_size, class_mode='binary', shuffle=True, seed=42)
 
-test_generator = aug.flow_from_directory(test_folder,                                                  target_size=(150, 150),                                                  batch_size=batch_size,                                                  class_mode='binary', shuffle=True, seed=42)
+test_generator = aug.flow_from_directory(test_folder,target_size=(150, 150), batch_size=batch_size, class_mode='binary', shuffle=True, seed=42)
 ```
 
 As long we used data augmentation and so on ImageDataGenerator, we have to use the fit_generator function to train the model. To train the model, after several tests I decided to use 50 epochs and 30 steps per epoch, which generated good results.
@@ -92,7 +90,7 @@ As long we used data augmentation and so on ImageDataGenerator, we have to use t
 ```
 epochs     = 50
 
-history = model.fit_generator(train_generator,                    steps_per_epoch=30,                    epochs=epochs,                    validation_data=test_generator,                    validation_steps=10,                    verbose=1,callbacks=callbacks)
+history = model.fit_generator(train_generator,steps_per_epoch=30, validation_data=test_generator,validation_steps=10, verbose=1,callbacks=callbacks)
 ```
 
 To run the training model follow the steps bellow:
