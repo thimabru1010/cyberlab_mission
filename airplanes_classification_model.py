@@ -69,8 +69,8 @@ aug2=ImageDataGenerator(rescale=1./255, rotation_range=30,
        
 aug = ImageDataGenerator(rescale=1./255)
 
-train_folder = '/home/thiago/GitHub/deep_learning/estagio/dataset/train'
-test_folder = '/home/thiago/GitHub/deep_learning/estagio/dataset/test'
+train_folder = 'dataset/train'
+test_folder = 'dataset/test'
 
 train_generator = aug2.flow_from_directory(train_folder,                                                    target_size=(150, 150),                                                    batch_size=batch_size,                                                    class_mode='binary', shuffle=True, seed=42)
 
