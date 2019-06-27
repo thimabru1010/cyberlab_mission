@@ -31,7 +31,7 @@ Tip: To download the test/validation and training data remember to check the pag
 
 To create the model I used a smaller version of VGG16Net architecture because it's a good classical architecture to solve a binary classifier problem.
 
-'''
+```
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=(150, 150,3)))
 model.add(Activation('relu'))
@@ -54,15 +54,15 @@ model.add(Dropout(0.5))
 
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
-'''
+```
 
 As a characteristic of VGG16Net model, I used just 3x3 filter in all the convolutional layers, a pooling of type Max (MaxPooling) to reduce the size of images and a fully connected (Dense) layer right after a flattening layer (used to transform in 1D vectors). After the fully connected we have a dropout to avoid overfitting of 0.5. The Output layer only have one node since we're using a binary classifier. As well, we're using 'sigmoid' function instead of 'softmax' as is used in a multiclass neural network.
 
 To compile the model I used the gradient descendant optimizer ('adam') and binary loss as long as is a binary classification.
 
-'''
+```
 model.compile(loss='binary_crossentropy', optimizer='adam',metrics=['accuracy'])
-'''
+```
 
 ### Training
 
@@ -70,7 +70,7 @@ To train the model I used 1000 images of each class approximated and 500 images 
 
 Also, I used data augmentation to enhance the model and prevent overfitting. But I just used on the training data. The validation data I kept without any transformation, because I already had enough data to validate. To use data augmentation it is necessary to use 'keras.preprocessing.image' and create a ImageDataGenerator object.
 
-'''
+```
 batch_size = 20
 
 aug2=ImageDataGenerator(rescale=1./255, rotation_range=30, 
@@ -85,27 +85,25 @@ test_folder = '/home/thiago/GitHub/deep_learning/estagio/modules/dataset/test'
 train_generator = aug2.flow_from_directory(train_folder,                                                    target_size=(150, 150),                                                    batch_size=batch_size,                                                    class_mode='binary', shuffle=True, seed=42)
 
 test_generator = aug.flow_from_directory(test_folder,                                                  target_size=(150, 150),                                                  batch_size=batch_size,                                                  class_mode='binary', shuffle=True, seed=42)
-'''
+```
 
 As long we used data augmentation and so on ImageDataGenerator, we have to use the fit_generator function to train the model. To train the model, after several tests I decided to use 50 epochs and 30 steps per epoch, which generated good results.
 
-'''
+```
 epochs     = 50
 
 history = model.fit_generator(train_generator,                    steps_per_epoch=30,                    epochs=epochs,                    validation_data=test_generator,                    validation_steps=10,                    verbose=1,callbacks=callbacks)
-'''
+```
 
 To run the training model follow the steps bellow:
 
-'''
+```
 python airplanes_classification_model.py --modelName --historyModel
-'''
+```
 
 * --modelName: -m: Model's name output (default='airplanes_classification.model')
 
 * --historyModel: -hm: History's name output (default='history.json')
-
-------------------------------- Terminar
 
 ## Prediction
 
@@ -115,9 +113,9 @@ If you run the model you will get the prediction for each of the 70 images with 
 
 To run the program follow the steps bellow:
 
-'''
+```
 python prediction.py --modelName --historyModel --predictionSingle --predictionFolder
-'''
+```
 
 * --modelName: -m: Model's name input (default='airplanes.model')
 
