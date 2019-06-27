@@ -56,7 +56,8 @@ model.add(Dense(1))
 model.add(Activation('sigmoid'))
 ```
 
-As a characteristic of VGG16Net model, I used just 3x3 filter in all the convolutional layers, a pooling of type Max (MaxPooling) to reduce the size of images and a fully connected (Dense) layer right after a flattening layer (used to transform in 1D vectors). After the fully connected we have a dropout to avoid overfitting of 0.5. The Output layer only have one node since we're using a binary classifier. As well, we're using 'sigmoid' function instead of 'softmax' as is used in a multiclass neural network.
+As a characteristic of VGG16Net model, I used just filters with 3x3 kernel in all the convolutional layers, a pooling of type Max (MaxPooling) to reduce the size of images and a fully connected (Dense) layer right after a flattening layer (used to transform in 1D vectors). After the fully connected we have a dropout to avoid overfitting of 0.5. Besides the last dropout, another two was used on the second and third block which increased the accuracy of the model. Another fact increased the accuracy was increasing the number of filters. It makes sense because if we have more and more filters we can extract more information from the image, as was made using 32, 64 and 128 filters.
+The Output layer only have one node since we're using a binary classifier. As well, we're using 'sigmoid' function instead of 'softmax' as is used in a multiclass neural network.
 
 To compile the model I used the gradient descendant optimizer ('adam') and binary loss as long as is a binary classification.
 
