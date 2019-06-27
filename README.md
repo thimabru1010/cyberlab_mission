@@ -7,9 +7,9 @@ The first difficult of the process was to download all the data from the site ww
 
 to run the program follow the steps below:
 
-'''
+```
 python download_data.py --path --name --batch --iterations --startPage
-'''
+```
 
 * --path: -p: path to download folder (required)
 
